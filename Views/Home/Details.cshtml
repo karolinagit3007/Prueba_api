@@ -1,0 +1,28 @@
+﻿@model EjemploMVC_MAT.Models.CardModel
+
+@{
+    ViewData["Title"] = "Detalles de la Carta";
+}
+
+<div class="container">
+    <h2 class="text-center mb-4">@Model.Name</h2>
+
+    <div class="card shadow-lg rounded-lg">
+        <div class="row g-0">
+            <div class="col-md-6">
+                <img src="@Model.CardImages?.FirstOrDefault()?.ImageUrl ?? '/images/default-image.jpg'" class="img-fluid rounded-start" alt="@Model.Name" style="height: 100%; width: 100%; object-fit: cover;">
+            </div>
+            <div class="col-md-6">
+                <div class="card-body">
+                    <h5 class="card-title text-primary">@Model.Name</h5>
+                    <p class="card-text"><strong>Tipo:</strong> @Model.Type</p>
+                    <p class="card-text"><strong>Atributo:</strong> @Model.Attribute</p>
+                    <p class="card-text"><strong>Raza:</strong> @Model.Race</p>
+                    <p class="card-text"><strong>ATK:</strong> @Model.Atk | <strong>DEF:</strong> @Model.Def</p>
+                    <p class="card-text"><strong>Descripción:</strong> @Model.Desc</p>
+                    <a href="@Url.Action("Index", "Home")" class="btn btn-secondary">Volver</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
