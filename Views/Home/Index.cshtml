@@ -4,40 +4,29 @@
     ViewData["Title"] = "Lista de Cartas";
 }
 
-<h2 class="text-center mb-4 text-primary">Cartas de Blue-Eyes White Dragon</h2>
+<h2 class="text-center mb-4">Cartas de Blue-Eyes White Dragon</h2>
 
 <div class="row">
     @foreach (var card in Model)
     {
         <div class="col-md-4 mb-4">
-            <div class="card h-100 shadow-lg border-0">
+            <div class="card h-100 shadow">
                 @if (card.CardImages != null && card.CardImages.Any() && !string.IsNullOrWhiteSpace(card.CardImages.First().ImageUrl))
                 {
-                    <img src="@card.CardImages.First().ImageUrl" class="card-img-top rounded-top" alt="@card.Name" style="height: 250px; object-fit: cover;">
+                    <img src="@card.CardImages.First().ImageUrl" class="card-img-top" alt="@card.Name" style="height: 300px; object-fit: cover;">
                 }
                 else
                 {
-                    <div class="card-img-top bg-light d-flex align-items-center justify-content-center" style="height: 250px;">
+                    <div class="card-img-top bg-light d-flex align-items-center justify-content-center" style="height: 300px;">
                         <p class="text-muted">No hay imagen disponible</p>
                     </div>
                 }
                 <div class="card-body d-flex flex-column">
-                    <h5 class="card-title text-center">@card.Name</h5>
-                    <p class="card-text flex-grow-1 text-center">@card.Desc</p>
-                    <div class="d-flex justify-content-between">
-                        <a href="@Url.Action("Details", "Home", new { id = card.Id })" class="btn btn-primary">Ver Detalles</a>
-                    </div>
+                    <h5 class="card-title">@card.Name</h5>
+                    <p class="card-text flex-grow-1">@card.Desc</p>
+                    <a href="@Url.Action("Details", "Home", new { id = card.Id })" class="btn btn-primary mt-2">Ver Detalles</a>
                 </div>
             </div>
         </div>
     }
-</div>
-
-<!-- Paginación -->
-<div class="d-flex justify-content-center mt-4">
-    <a href="@Url.Action("Index", "Home", new { page = 1 })" class="btn btn-primary">Primera</a>
-    <a href="@Url.Action("Index", "Home", new { page = @ViewData["PageNumber"] != null ? (int)ViewData["PageNumber"] - 1 : 1 })" class="btn btn-secondary @(ViewData["PageNumber"] == null || (int)ViewData["PageNumber"] <= 1 ? "disabled" : "")">Anterior</a>
-    <span class="mx-2">Página @ViewData["PageNumber"]</span>
-    <a href="@Url.Action("Index", "Home", new { page = @ViewData["PageNumber"] != null ? (int)ViewData["PageNumber"] + 1 : 1 })" class="btn btn-secondary">Siguiente</a>
-    <a href="@Url.Action("Index", "Home", new { page = 99999 })" class="btn btn-primary">Última</a>
 </div>

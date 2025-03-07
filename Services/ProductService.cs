@@ -15,12 +15,12 @@ public class CardService
         _httpClient = httpClient;
     }
 
-    public async Task<List<CardModel>> GetBlueEyesCardsAsync(int pageNumber = 1, int pageSize = 10)
+    public async Task<List<CardModel>> GetBlueEyesCardsAsync()
     {
-        string apiUrl = $"https://db.ygoprodeck.com/api/v7/cardinfo.php?archetype=Blue-Eyes&page={pageNumber}&num={pageSize}";
+        string apiUrl = "https://db.ygoprodeck.com/api/v7/cardinfo.php?archetype=Blue-Eyes";
         var response = await _httpClient.GetStringAsync(apiUrl);
         var jsonResponse = JsonConvert.DeserializeObject<ApiResponse>(response);
-
+        
         return jsonResponse?.Data ?? new List<CardModel>();
     }
 
@@ -38,4 +38,3 @@ public class ApiResponse
 {
     public List<CardModel> Data { get; set; }
 }
-

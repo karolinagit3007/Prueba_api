@@ -17,11 +17,9 @@ public class HomeController : Controller
         _cardService = cardService;
     }
 
-    // Método para la vista de la lista de cartas, con paginación
-    public async Task<IActionResult> Index(int page = 1, int pageSize = 10)
+    public async Task<IActionResult> Index()
     {
-        var cards = await _cardService.GetBlueEyesCardsAsync(page, pageSize);
-        ViewData["PageNumber"] = page;
+        var cards = await _cardService.GetBlueEyesCardsAsync();
         return View(cards);
     }
 
@@ -34,5 +32,15 @@ public class HomeController : Controller
         }
         return View(card);
     }
-}
 
+    public IActionResult Privacy()
+    {
+        return View();
+    }
+
+    [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+    public IActionResult Error()
+    {
+        return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+    }
+}
